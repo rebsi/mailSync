@@ -27,6 +27,7 @@ public class MergeStart {
             init();
         } catch (Exception ex) {
             log.fatal("Failed to merge.", ex);
+            throw ex;
         }
     }
 
