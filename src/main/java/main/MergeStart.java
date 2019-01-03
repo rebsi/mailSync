@@ -1,19 +1,18 @@
 package main;
 
-import java.io.InputStream;
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.temporal.ChronoUnit;
-
+import interfaces.CalendarSource;
+import interfaces.CalendarTarget;
+import merger.Merger;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
-import interfaces.CalendarSource;
-import interfaces.CalendarTarget;
-import merger.Merger;
+import java.io.InputStream;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 
 public class MergeStart {
     static Logger log = LogManager.getLogger(MergeStart.class);

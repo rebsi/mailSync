@@ -1,18 +1,17 @@
 package merger;
 
+import interfaces.AbstractEvent;
+import interfaces.CalendarSource;
+import interfaces.CalendarTarget;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import interfaces.AbstractEvent;
-import interfaces.CalendarSource;
-import interfaces.CalendarTarget;
 
 public class Merger {
     static Logger log = LogManager.getLogger(Merger.class);

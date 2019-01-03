@@ -1,9 +1,9 @@
 package calendarImpl.ews;
 
-import java.time.Instant;
-
 import interfaces.AbstractEvent;
 import microsoft.exchange.webservices.data.core.service.item.Appointment;
+
+import java.time.Instant;
 
 public class EwsEvent extends AbstractEvent {
     private final String iCalUid;

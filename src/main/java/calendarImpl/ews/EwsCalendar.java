@@ -1,17 +1,5 @@
 package calendarImpl.ews;
 
-import java.net.URI;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import microsoft.exchange.webservices.data.credential.ExchangeCredentials;
-import microsoft.exchange.webservices.data.search.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
-
 import interfaces.AbstractEvent;
 import interfaces.CalendarSource;
 import microsoft.exchange.webservices.data.core.ExchangeService;
@@ -23,11 +11,20 @@ import microsoft.exchange.webservices.data.core.enumeration.search.FolderTravers
 import microsoft.exchange.webservices.data.core.service.item.Appointment;
 import microsoft.exchange.webservices.data.core.service.schema.FolderSchema;
 import microsoft.exchange.webservices.data.property.complex.FolderId;
+import microsoft.exchange.webservices.data.search.CalendarView;
+import microsoft.exchange.webservices.data.search.FindFoldersResults;
+import microsoft.exchange.webservices.data.search.FindItemsResults;
+import microsoft.exchange.webservices.data.search.FolderView;
 import microsoft.exchange.webservices.data.search.filter.SearchFilter;
+import org.json.JSONObject;
+
+import java.net.URI;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class EwsCalendar implements CalendarSource {
-    static Logger log = LogManager.getLogger(EwsCalendar.class);
-
     private final String mailBox;
     private final FolderId folderId;
     private final ExchangeService _serviceInstance;

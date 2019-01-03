@@ -1,12 +1,11 @@
 package calendarImpl.google;
 
-import java.time.Instant;
-
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
-
 import interfaces.AbstractEvent;
+
+import java.time.Instant;
 
 public class GoogleEvent extends AbstractEvent {
     private final Event event;
