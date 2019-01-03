@@ -37,7 +37,7 @@ public abstract class AbstractEvent {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof AbstractEvent)) {
             return false;
         }
 
