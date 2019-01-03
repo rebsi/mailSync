@@ -34,7 +34,7 @@ dependencies {
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': 'mailSync',  
+        attributes 'Implementation-Title': 'calendarSync',  
             'Implementation-Version': version,
             'Main-Class': 'main.MergeStart'
     }
