@@ -80,9 +80,10 @@ public class GoogleCalendar implements CalendarTarget {
     @Override
     public String toString() {
         try {
-            calendarName = service.calendars().get(calendarId).execute().getSummary();
+            calendarName = "GoogleCalendar [" + service.calendars().get(calendarId).execute().getSummary() + "]";
         } catch (IOException e) {
             log.error("Failed to retrieve calendar title.", e);
+            calendarName = "GoogleCalendar -ERROR-";
         }
 
         return calendarName;
