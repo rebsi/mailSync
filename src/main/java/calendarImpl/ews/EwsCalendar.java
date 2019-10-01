@@ -71,6 +71,11 @@ public class EwsCalendar implements CalendarSource {
         return events;
     }
 
+    @Override
+    public String toString() {
+        return "EwsCalendar [" + mailBox + "/" + folderId.getFolderName() + "]";
+    }
+
     private FolderId GetFolder(String name) throws Exception {
         FolderView view = new FolderView(2);
         PropertySet propertySet = new PropertySet(BasePropertySet.IdOnly);
