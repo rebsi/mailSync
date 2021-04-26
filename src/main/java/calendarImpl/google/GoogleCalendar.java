@@ -18,10 +18,6 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
 import interfaces.AbstractEvent;
 import interfaces.CalendarTarget;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,8 +27,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 public class GoogleCalendar implements CalendarTarget {
+
     static Logger log = LogManager.getLogger(GoogleCalendar.class);
 
     private final String calendarId;
@@ -69,7 +69,8 @@ public class GoogleCalendar implements CalendarTarget {
     @Override
     public void create(AbstractEvent toCreate) throws IOException {
         Event event = new Event().setSummary(toCreate.getTitle())
-                .setLocation(toCreate.getLocation()).setDescription(toCreate.getDescription())
+                .setLocation(toCreate.getLocation())
+                .setDescription(toCreate.getDescription())
                 .setStart(getEventDateTime(toCreate, e -> e.getStart()))
                 .setEnd(getEventDateTime(toCreate, e -> e.getEnd()))
                 .setICalUID(toCreate.getICalUID());
@@ -90,7 +91,7 @@ public class GoogleCalendar implements CalendarTarget {
     }
 
     private static EventDateTime getEventDateTime(AbstractEvent event,
-                                                  Function<AbstractEvent, Instant> instantSelector) {
+            Function<AbstractEvent, Instant> instantSelector) {
         EventDateTime edt = new EventDateTime();
         if (event.isAllDayEvent()) {
             DateTime endDateTime = new DateTime(true, instantSelector.apply(event).toEpochMilli(),
@@ -104,12 +105,12 @@ public class GoogleCalendar implements CalendarTarget {
     }
 
     private static final String APPLICATION_NAME = "CalendarSync";
-    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
 
     /**
-     * Global instance of the scopes required by this quickstart. If modifying these scopes, delete your previously
-     * saved tokens/ folder.
+     * Global instance of the scopes required by this quickstart. If modifying
+     * these scopes, delete your previously saved tokens/ folder.
      */
     private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR);
     private static final String CREDENTIALS_FILE_PATH = "/googleCredentials.json";
