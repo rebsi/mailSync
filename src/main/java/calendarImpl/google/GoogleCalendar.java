@@ -21,6 +21,8 @@ import interfaces.CalendarTarget;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.security.GeneralSecurityException;
 import java.time.Instant;
 import java.util.Collections;
@@ -40,6 +42,19 @@ public class GoogleCalendar implements CalendarTarget {
     private String calendarName;
 
     public GoogleCalendar(JSONObject settings) throws GeneralSecurityException, IOException {
+
+        System.setProperty("https.proxyHost", "10.170.2.120");
+        System.setProperty("https.proxyPort", "3128");
+        /* Authenticator.setDefault(
+                new Authenticator() {
+                    @Override
+                    public PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(
+                                "USER", "PW".toCharArray());
+                    }
+                }
+        );*/
+
         calendarId = settings.getString("calendarId");
         service = getService();
     }
