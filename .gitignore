@@ -26,3 +26,8 @@ hs_err_pid*
 
 /.gradle/
 /.idea/
+
+# project specific
+/src/main/resources/googleCredentials.json
+/src/main/resources/settings.json
+/tokens/*
