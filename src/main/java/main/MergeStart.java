@@ -49,11 +49,11 @@ public class MergeStart {
             throw new Exception("syncDayPeriod has to be grater 0: " + syncDayPeriod);
         }
 
-        JSONObject source = calendarConfig.getJSONObject("sourceCalendar");
-        calendarSource = createCalendar(source);
+        JSONObject sourceConfig = calendarConfig.getJSONObject("sourceCalendar");
+        calendarSource = createCalendar(sourceConfig);
 
-        JSONObject target = calendarConfig.getJSONObject("targetCalendar");
-        calendarTarget = createCalendar(target);
+        JSONObject targetConfig = calendarConfig.getJSONObject("targetCalendar");
+        calendarTarget = createCalendar(targetConfig);
     }
 
     private static <T extends CalendarSource> T createCalendar(JSONObject settings)

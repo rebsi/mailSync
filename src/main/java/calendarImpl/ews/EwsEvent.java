@@ -1,13 +1,14 @@
 package calendarImpl.ews;
 
 import interfaces.AbstractEvent;
+import microsoft.exchange.webservices.data.core.enumeration.service.calendar.AppointmentType;
+import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
+import microsoft.exchange.webservices.data.core.service.item.Appointment;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
-import microsoft.exchange.webservices.data.core.enumeration.service.calendar.AppointmentType;
-import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
-import microsoft.exchange.webservices.data.core.service.item.Appointment;
 
 public class EwsEvent extends AbstractEvent {
 
