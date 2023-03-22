@@ -28,9 +28,16 @@ public class EwsCalendar implements CalendarSource {
     private final String mailBox;
     private final FolderId folderId;
     private final ExchangeService _serviceInstance;
+    private final int bodySizeLimit;
 
     public EwsCalendar(JSONObject settings) throws Exception {
         mailBox = settings.getString("mailBox");
+
+        if (settings.has("bodySizeLimit")) {
+            bodySizeLimit = settings.getInt("bodySizeLimit");
+        } else {
+            bodySizeLimit = -1;
+        }
 
         _serviceInstance = new ExchangeService(ExchangeVersion.Exchange2010_SP2);
         //_serviceInstance.setCredentials(ExchangeCredentials.getExchangeCredentialsFromNetworkCredential("", "", ""));
@@ -66,7 +73,7 @@ public class EwsCalendar implements CalendarSource {
 
         List<AbstractEvent> events = new ArrayList<>();
         for (Appointment appointment : res) {
-            events.add(new EwsEvent(appointment));
+            events.add(new EwsEvent(appointment, bodySizeLimit));
         }
         return events;
     }

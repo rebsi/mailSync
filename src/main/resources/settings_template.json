@@ -3,7 +3,8 @@
   "sourceCalendar": {
     "implementation": "calendarImpl.ews.EwsCalendar",
     "mailBox": "Robert.Ebetsberger@stiwa.com",
-    "url": "https://webmail.stiwa.com/EWS/Exchange.asmx"
+    "url": "https://webmail.stiwa.com/EWS/Exchange.asmx",
+    "bodySizeLimit": 8100
   },
   "targetCalendar": {
     "implementation": "calendarImpl.google.GoogleCalendar",
