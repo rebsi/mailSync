@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -42,7 +43,7 @@ public class MergeStart {
 
     private void init() throws Exception {
         InputStream in = MergeStart.class.getResourceAsStream("/settings.json");
-        JSONObject calendarConfig = new JSONObject(IOUtils.toString(in, "UTF-8"));
+        JSONObject calendarConfig = new JSONObject(IOUtils.toString(in, StandardCharsets.UTF_8));
 
         syncDayPeriod = calendarConfig.getInt("syncDayPeriod");
         if (syncDayPeriod <= 0) {

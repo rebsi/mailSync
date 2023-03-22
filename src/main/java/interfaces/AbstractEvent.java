@@ -76,14 +76,8 @@ public abstract class AbstractEvent {
         }
 
         if (getEnd() == null) {
-            if (other.getEnd() != null) {
-                return false;
-            }
-        } else if (!getEnd().equals(other.getEnd())) {
-            return false;
-        }
-
-        return true;
+            return other.getEnd() == null;
+        } else return getEnd().equals(other.getEnd());
     }
 
     @Override
