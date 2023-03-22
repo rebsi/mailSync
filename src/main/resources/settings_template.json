@@ -1,0 +1,16 @@
+{
+  "syncDayPeriod": 180,
+  "sourceCalendar": {
+    "implementation": "calendarImpl.ews.EwsCalendar",
+    "mailBox": "Robert.Ebetsberger@stiwa.com",
+    "url": "https://webmail.stiwa.com/EWS/Exchange.asmx"
+  },
+  "targetCalendar": {
+    "implementation": "calendarImpl.google.GoogleCalendar",
+    "calendarId": "_________@group.calendar.google.com",
+    "proxyHost": "",
+    "proxyPort": "",
+    "proxyUser": "",
+    "proxyPw": ""
+  }
+}
