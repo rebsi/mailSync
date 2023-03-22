@@ -1,10 +1,21 @@
-apply plugin: 'java'
-apply plugin: 'application'
+plugins {
+    id "application"
+}
 
-mainClassName = 'main.MergeStart'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-version = '1.0'
+group 'main'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+java {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+}
+compileJava {
+    options.compilerArgs << '-Xlint:unchecked'
+}
+application {
+    mainClass.set("main.MergeStart")
+}
 
 repositories {
     mavenCentral()
@@ -14,32 +25,40 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.api-client:google-api-client:1.33.1'
+    implementation 'com.google.api-client:google-api-client:1.33.1'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.33.0'
-    compile 'com.google.apis:google-api-services-calendar:v3-rev20211229-1.32.1'
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.33.0'
+    implementation 'com.google.apis:google-api-services-calendar:v3-rev20211229-1.32.1'
 
-    //compile 'com.microsoft.ews-java-api:ews-java-api:2.0'
-    compile 'org.apache.httpcomponents:httpclient-win:4.5.13'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
-    compile group: 'joda-time', name: 'joda-time', version: '2.10.13'
-    compile 'org.apache.httpcomponents:httpclient:4.5.13'
-    compile name: 'ews-java-api-2.1-ntlm_fix'
+    //implementation 'com.microsoft.ews-java-api:ews-java-api:2.0'
+    implementation 'org.apache.httpcomponents:httpclient-win:4.5.13'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+    implementation group: 'joda-time', name: 'joda-time', version: '2.12.2'
+    //implementation group: 'joda-time', name: 'joda-time', version: '2.10.13'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation name: 'ews-java-api-2.1-ntlm_fix'
 
-    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
-    compile group: 'org.json', name: 'json', version: '20211205'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
+    implementation group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+    implementation group: 'org.json', name: 'json', version: '20211205'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
+
+    implementation group: 'com.github.peter-gergely-horvath', name: 'windpapi4j', version: '1.1.0'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
-        attributes 'Implementation-Title': 'calendarSync',  
-            'Implementation-Version': version,
-            'Main-Class': 'main.MergeStart'
+        attributes 'Implementation-Title': 'calendarSync',
+                'Implementation-Version': archiveVersion,
+                'Main-Class': 'main.MergeStart'
     }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    archiveBaseName = project.name + '-all'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
