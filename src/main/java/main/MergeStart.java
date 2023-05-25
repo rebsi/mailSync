@@ -33,7 +33,8 @@ public class MergeStart {
 
     public void merge() throws Exception {
         Merger merger = new Merger(calendarSource, calendarTarget);
-        merger.setFilter(evt -> !"#Mittag#".equals(evt.getTitle()));
+        merger.setFilter(evt -> evt.getTitle() == null ||
+                (!"#Mittag#".equals(evt.getTitle()) && !evt.getTitle().startsWith("##")));
 
         Instant now = OffsetDateTime.now(ZoneOffset.UTC).toInstant();
         Instant inOneMonth = now.plus(syncDayPeriod, ChronoUnit.DAYS);
