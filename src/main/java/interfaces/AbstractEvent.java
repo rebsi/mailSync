@@ -1,8 +1,16 @@
 package interfaces;
 
+import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 
 public abstract class AbstractEvent {
+    public static final SimpleDateFormat DATE_ONLY_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat RFC_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+
     public abstract String getICalUID();
 
     public abstract String getTitle();
@@ -16,6 +24,10 @@ public abstract class AbstractEvent {
     public abstract String getLocation();
 
     public abstract boolean isAllDayEvent();
+
+    protected Instant truncateTimeAndZone(Date date) throws ParseException, ServiceLocalException {
+        return RFC_DATE_FORMAT.parse(DATE_ONLY_FORMAT.format(date) + "T00:00:00.000+0000").toInstant();
+    }
 
     @Override
     public int hashCode() {
