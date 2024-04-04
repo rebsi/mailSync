@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OutlookEventsFetch": {
+      "commandName": "Project",
+      "commandLineArgs": "\"04.04.2024 10:11:53\" \"30.04.2024 10:11:53\""
+    }
+  }
+}
